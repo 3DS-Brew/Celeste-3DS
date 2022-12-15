@@ -1,0 +1,21 @@
+name: 3DS Build
+
+on: workflow_dispatch
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.issue.number || github.run_id }}
+  cancel-in-progress: true
+
+jobs:
+  celeste:
+    runs-on: ubuntu-latest
+    container:
+      image: devkitpro/devkitarm:latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install build requirements
+        run: |
+          apt update
+          apt install ninja-build 
+      - name: Celeste build
+        run: make            
