@@ -18,4 +18,4 @@ jobs:
           apt update
           apt install ninja-build 
       - name: Celeste build
-        run: make            
+        run: make -f Makefile.3ds         
